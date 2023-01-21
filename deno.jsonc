@@ -1,0 +1,8 @@
+{
+    "tasks": {
+        "example:simple": "deno run -A --unstable examples/run.ts simple.scss",
+        "example:compress": "deno run -A --unstable examples/run.ts compress.scss c",
+        "example:indent": "deno run -A --unstable examples/run.ts indent.sass",
+        "example:css-err": "deno run -A --unstable examples/run.ts css-err.scss"
+    }
+}

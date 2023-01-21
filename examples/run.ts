@@ -4,7 +4,7 @@ import { brightBlue, brightMagenta, bold } from "https://deno.land/std@0.173.0/f
 console.log(`${bold("Running Example: ")}${Deno.args[0]}\n${bold("----")}`)
 
 const
-	PATH = `${import.meta.resolve(`./${Deno.args[0]}`)}`,
+	PATH = `${Deno.build.os !== "windows" ? "/" : ""}${import.meta.resolve(`./${Deno.args[0]}`)}`,
 	STYLE = Deno.args[1] === "c" ? Style.COMPRESSED : Style.EXPANDED,
 	EXAMPLE = Salta.compile({
 		file: PATH,
@@ -13,5 +13,5 @@ const
 	})
 
 console.log(
-	`${brightMagenta("Input:")}\n${await fetch(PATH).then(x => x.text())}\n\n${brightBlue("Output:")}\n${EXAMPLE}`.trim()
+	`${brightMagenta("Input:")}\n${await fetch(PATH.replace("/file", "file")).then(x => x.text())}\n\n${brightBlue("Output:")}\n${EXAMPLE}`.trim()
 )

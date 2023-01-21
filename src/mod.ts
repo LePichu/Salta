@@ -1,8 +1,12 @@
+/** Enum for setting the type of SCSS output to get, the fields are self-explanatory. */
 export enum Style {
+	/** Equivalent to `--style="compressed"` */
 	COMPRESSED = "compressed",
+	/** Equivalent to `--style="expanded"` */
 	EXPANDED = "expanded"
 }
 
+/** Options for the compiler, this allow you to mold the output however you like. Equivalent to the Command Line options in Dart-Sass. */
 export interface Options {
 	file: string,
 	style?: Style,
@@ -23,18 +27,21 @@ function flagBuilder(opt: Options) {
 
 
 // This is a class for now, as we plan to add more functions to it in the future.
+/**
+ * `Salta` is the main class for the module, it contains all the functions for the compiler.
+ */
 export class Salta {
 	/** `Salta.Compile(opt: Options)` compiles a Sass file to CSS.
 	*	@param opt Options for the compiler.
 	*/
 	static compile(opt: Options) {
-		let PROC: Deno.Command 
+		let PROC: Deno.Command
 
-		if(Deno.build.os !== "windows") {
+		if (Deno.build.os !== "windows") {
 			PROC = new Deno.Command("sass", {
 				args: [
 					...flagBuilder(opt),
-					"--color", 
+					"--color",
 					"--error-css"
 				],
 				stdout: "piped",
@@ -57,14 +64,14 @@ export class Salta {
 		if (PROC.outputSync().stderr.length > 0) {
 			const errMsg = new TextDecoder().decode(PROC.outputSync().stderr).trim()
 			const err = new Error(
-				"\r                                        " 
-				+ "\n" 
+				"\r                                        "
+				+ "\n"
 				+ errMsg
 			)
 			err.stack = undefined
 			throw err
 		}
-	
+
 		return new TextDecoder().decode(PROC.outputSync().stdout).trim()
 	}
 }

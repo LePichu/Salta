@@ -17,7 +17,7 @@
 To get started, import `Salta` and its types from a registry like [deno.land/x](https://deno.land/x/salta) or use it directly from [GitHub](https://raw.githubusercontent.com/lukeed/salta/master/mod.ts).
 
 ```ts
-import { Salta, Style } from "https://deno.land/x/salta/mod.ts"
+import { Salta, Style } from "https://deno.land/x/salta/src/mod.ts"
 
 const EXAMPLE = Salta.compile({
 	file: "/path/to/file.scss",

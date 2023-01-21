@@ -1,8 +1,15 @@
 <h1 align="center">
 	Salta
 </h1>
-<p align="center">A Native, Blazingly Fast, and always up-to-date way of using Dart Sass in Deno.</p>
-![![](https://dcbadge.vercel.app/api/server/Nhvt7X84Hj)](https://discord.gg/Nhvt7X84Hj)
+<p align="center">
+	A Native, Blazingly Fast, and always up-to-date way of using Dart Sass in Deno. <br> <br>
+	<a href="https://discord.gg/Nhvt7X84Hj">
+		<img src="https://dcbadge.vercel.app/api/server/Nhvt7X84Hj">
+	</a>	
+	<a href="https://deno.land/x/salta">
+		<img src="https://img.shields.io/badge/available%20on-deno.land/x-normal.svg?style=for-the-badge&logo=deno&color=blue">
+	</a>
+</p>
 
 ![The Salta Banner](./branding/salta_banner.png)
 

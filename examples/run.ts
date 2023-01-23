@@ -1,17 +1,21 @@
 import { Salta, Style } from "../src/mod.ts"
 import { brightBlue, brightMagenta, bold } from "https://deno.land/std@0.173.0/fmt/colors.ts"
 
-console.log(`${bold("Running Example: ")}${Deno.args[0]}\n${bold("----")}`)
+console.log(`${bold("----\nDebug Info:")} IS_DEPLOY=${Deno.env.get("DENO_REGION") !== undefined} USE_ISOLATE=${Deno.env.get("SALTA_USE_ISOLATE") === "true"}`)
+
+console.log(`${bold("Running Example:")} ${Deno.args[0]}\n${bold("----")}`)
 
 const
-	PATH = `${Deno.build.os !== "windows" ? "/" : ""}${import.meta.resolve(`./${Deno.args[0]}`)}`,
+	PATH = `${Deno.cwd()}/examples/${Deno.args[0]}`,
 	STYLE = Deno.args[1] === "c" ? Style.COMPRESSED : Style.EXPANDED,
 	EXAMPLE = Salta.compile({
 		file: PATH,
 		style: STYLE,
-		quiet: true
+		quiet: true,
+		// Do this to distinguish between isolate and JS library versions.
+		sourcemap: Deno.env.get("SALTA_USE_ISOLATE") === "true"
 	})
 
 console.log(
-	`${brightMagenta("Input:")}\n${await fetch(PATH.replace("/file", "file")).then(x => x.text())}\n\n${brightBlue("Output:")}\n${EXAMPLE}`.trim()
+	`${brightMagenta("Input:")}\n${Deno.readTextFileSync(PATH)}\n\n${brightBlue("Output:")}\n${EXAMPLE}`.trim()
 )

@@ -30,5 +30,9 @@ console.log(EXAMPLE)
 
 Salta under the hood relies on the `sass` (`dart-sass`) binary, which is not provided by most packages managers on Linux or Winget on Windows. You can, however, use `./src/install.ts` to get a copy of said `sass` binary easily, or to update an existing one. It fetches from the official `dart-sass` repository and installs an "isolate" of it under the same folder as Deno.
 
+As of `v0.2.0`, Salta can use the `dart-sass` compiled JS output to compile SCSS instead of the native "isolate", this also means Salta can now run on Deno Deploy. Please set the environment variable `SALTA_USE_ISOLATE` to a boolean to use the native "isolate" or the JS version. This was made possibly by [@oscarotero](https://github.com/oscarotero)'s efforts on [`@lumeland/sass`](https://www.npmjs.com/package/@lumeland/sass); we achieve this by vendoring that package and using it to compile SCSS.
+
+```ts
+
 ## License
 Salta is licensed under the MIT License. See [LICENSE](./LICENSE) for more information.

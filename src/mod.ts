@@ -1,3 +1,10 @@
+import sass from "../dart-sass/sass.ts"
+
+// Environment Variables
+const
+	USE_ISOLATE = Deno.env.get("SALTA_USE_ISOLATE") ? true : false,
+	IS_DEPLOY = Deno.env.get("DENO_REGION") !== undefined
+
 /** Enum for setting the type of SCSS output to get, the fields are self-explanatory. */
 export enum Style {
 	/** Equivalent to `--style="compressed"` */
@@ -34,7 +41,22 @@ export class Salta {
 	/** `Salta.Compile(opt: Options)` compiles a Sass file to CSS.
 	*	@param opt Options for the compiler.
 	*/
-	static compile(opt: Options) {
+	static compile(opt: Options): string {
+		if(USE_ISOLATE || IS_DEPLOY) {
+			// @ts-ignore ""
+			const ret = sass.compile(opt.file, {
+				sourceMap: opt.sourcemap,
+				sourceMapIncludeSources: opt.sourcemap,
+				style: opt.style
+			})
+			// TODO(LePichu); Add sourceMap support; this does not work at all.
+			return `${ret.css}\n/*# sourceMappingURL=data:application/json;base64, */`
+		}
+
+		return this.compileWithIsolate(opt)
+	}
+
+	private static compileWithIsolate(opt: Options): string {
 		let PROC: Deno.Command
 
 		if (Deno.build.os !== "windows") {

@@ -41,7 +41,7 @@ new Deno.Command(shell() as string, {
         "ARCH": Deno.build.arch === "x86_64" ? "x64" : "arm64",
         "OS": Deno.build.os === "darwin" ? "macos" : "linux",
         "EXT": Deno.build.os === "windows" ? "zip" : "tar.gz",
-        "SASS_VER": "1.57.0",
+        "SASS_VER": "1.57.1",
         "DL_PATH": Deno.execPath().replace(Deno.build.os === "windows" ? "/deno.exe" : "/deno", `/dart-sass.${Deno.build.os === "windows" ? "zip" : "tar.gz"}`),
         "INS_PATH": Deno.execPath().replace(Deno.build.os === "windows" ? "/deno.exe" : "/deno", "")
     },

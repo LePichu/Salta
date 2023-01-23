@@ -2,7 +2,7 @@ import sass from "../dart-sass/sass.ts"
 
 // Environment Variables
 const
-	USE_ISOLATE = Deno.env.get("SALTA_USE_ISOLATE") ? true : false,
+	USE_ISOLATE = Deno.env.get("SALTA_USE_ISOLATE") === "true" ? true : false,
 	IS_DEPLOY = Deno.env.get("DENO_REGION") !== undefined
 
 /** Enum for setting the type of SCSS output to get, the fields are self-explanatory. */

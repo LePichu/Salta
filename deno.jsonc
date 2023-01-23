@@ -1,9 +1,10 @@
 {
     "tasks": {
-        "example:simple": "deno run -A --unstable examples/run.ts simple.scss",
         "example:compress": "deno run -A --unstable examples/run.ts compress.scss c",
-        "example:indent": "deno run -A --unstable examples/run.ts indent.sass",
         "example:css-err": "deno run -A --unstable examples/run.ts css-err.scss",
+        "example:import": "deno run -A --unstable examples/run.ts import.scss",
+        "example:indent": "deno run -A --unstable examples/run.ts indent.sass",
+        "example:simple": "deno run -A --unstable examples/run.ts simple.scss",
         "vendor": "powershell -NoLogo -NoProfile ./dart-sass/vendor.ps1"
     }
 }

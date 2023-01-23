@@ -42,7 +42,7 @@ export class Salta {
 	*	@param opt Options for the compiler.
 	*/
 	static compile(opt: Options): string {
-		if(USE_ISOLATE || IS_DEPLOY) {
+		if(!USE_ISOLATE || IS_DEPLOY) {
 			// @ts-ignore ""
 			const ret = sass.compile(opt.file, {
 				sourceMap: opt.sourcemap,
